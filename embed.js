@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const targetDiv = document.getElementById("embeddedContent");
 
   // Fetch the content from the source website
-  fetch("https://cdn.jsdelivr.net/gh/rameshgagal80/embed-script@main/embed.js")
+  fetch("https://violet-tallulah-83.tiiny.site/")
     .then((response) => response.text())
     .then((html) => {
       const parser = new DOMParser();
