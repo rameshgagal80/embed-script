@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const targetDiv = document.getElementById("embeddedContent");
 
   // Fetch the content from the source website
-  fetch("https://source-website.com/page.html")
+  fetch("https://cdn.jsdelivr.net/gh/rameshgagal80/embed-script@main/embed.js")
     .then((response) => response.text())
     .then((html) => {
       const parser = new DOMParser();
