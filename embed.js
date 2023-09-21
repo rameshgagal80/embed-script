@@ -1,48 +1,68 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const app = document.getElementById('testing-script');
-    
-    // Create the login form
-    const loginForm = document.createElement('form');
-    loginForm.id = 'loginForm';
+            const app = document.getElementById('testing-script');
 
-    // Create the username input
-    const usernameInput = document.createElement('input');
-    usernameInput.type = 'text';
-    usernameInput.placeholder = 'Username';
-    usernameInput.name = 'username';
-    usernameInput.required = true;
+            // Function to create and display the login form
+            function displayLoginForm() {
+                const loginForm = document.createElement('form');
+                loginForm.id = 'loginForm';
 
-    // Create the password input
-    const passwordInput = document.createElement('input');
-    passwordInput.type = 'password';
-    passwordInput.placeholder = 'Password';
-    passwordInput.name = 'password';
-    passwordInput.required = true;
+                const usernameInput = document.createElement('input');
+                usernameInput.type = 'text';
+                usernameInput.placeholder = 'Username';
+                usernameInput.name = 'username';
+                usernameInput.required = true;
 
-    // Create the submit button
-    const submitButton = document.createElement('button');
-    submitButton.type = 'submit';
-    submitButton.textContent = 'Login';
+                const passwordInput = document.createElement('input');
+                passwordInput.type = 'password';
+                passwordInput.placeholder = 'Password';
+                passwordInput.name = 'password';
+                passwordInput.required = true;
 
-    // Append form elements to the form
-    loginForm.appendChild(usernameInput);
-    loginForm.appendChild(passwordInput);
-    loginForm.appendChild(submitButton);
+                const submitButton = document.createElement('button');
+                submitButton.type = 'submit';
+                submitButton.textContent = 'Login';
 
-    // Append the form to the app container
-    app.appendChild(loginForm);
+                loginForm.appendChild(usernameInput);
+                loginForm.appendChild(passwordInput);
+                loginForm.appendChild(submitButton);
 
-    // Add a form submission event listener
-    loginForm.addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent the default form submission
-        
-        // Get the form data
-        const formData = new FormData(loginForm);
-        const username = formData.get('username');
-        const password = formData.get('password');
+                loginForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
 
-        // You can now make an API call with the username and password
-        // For this example, we'll just display them in an alert
-        alert(`Username: ${username}\nPassword: ${password}`);
-    });
-});
+                    // Simulate a successful login (you can replace this with actual authentication logic)
+                    const isLoggedIn = true;
+
+                    if (isLoggedIn) {
+                        app.innerHTML = ''; // Clear the app container
+                        displayListing();
+                    }
+                });
+
+                app.appendChild(loginForm);
+            }
+
+            // Function to fetch and display the listing data
+            function displayListing() {
+                // Simulate fetching data from an API (replace with your API endpoint)
+                fetch('https://jsonplaceholder.typicode.com/posts')
+                    .then(response => response.json())
+                    .then(data => {
+                        const listing = document.createElement('ul');
+                        listing.id = 'listing';
+
+                        data.forEach(item => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = item.title;
+                            listing.appendChild(listItem);
+                        });
+
+                        app.appendChild(listing);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                    });
+            }
+
+            // Initial display: Show the login form
+            displayLoginForm();
+        });
