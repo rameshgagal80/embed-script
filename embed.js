@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-            const app = document.getElementById('testing-script');
+            const app = document.getElementById('app');
+            const toaster = document.getElementById('toaster');
+            const loginModal = document.getElementById('loginModal');
+            const modalUsername = document.getElementById('modalUsername');
+            const modalPassword = document.getElementById('modalPassword');
+            const closeModalButton = document.getElementById('closeModal');
 
             // Function to create and display the login form
             function displayLoginForm() {
@@ -33,36 +38,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     const isLoggedIn = true;
 
                     if (isLoggedIn) {
-                        app.innerHTML = ''; // Clear the app container
-                        displayListing();
+                        // Show the modal with login details
+                        modalUsername.textContent = usernameInput.value;
+                        modalPassword.textContent = passwordInput.value;
+                        loginModal.style.display = 'block';
+
+                        // Show the toaster for a successful login
+                        toaster.style.display = 'block';
+
+                        // Clear the form inputs
+                        usernameInput.value = '';
+                        passwordInput.value = '';
                     }
                 });
 
                 app.appendChild(loginForm);
             }
 
-            // Function to fetch and display the listing data
-            function displayListing() {
-                // Simulate fetching data from an API (replace with your API endpoint)
-                fetch('https://jsonplaceholder.typicode.com/posts')
-                    .then(response => response.json())
-                    .then(data => {
-                        const listing = document.createElement('ul');
-                        listing.id = 'listing';
-
-                        data.forEach(item => {
-                            const listItem = document.createElement('li');
-                            listItem.textContent = item.title;
-                            listing.appendChild(listItem);
-                        });
-
-                        app.appendChild(listing);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error);
-                    });
-            }
-
             // Initial display: Show the login form
             displayLoginForm();
+
+            // Close the modal when the "Close" button is clicked
+            closeModalButton.addEventListener('click', function () {
+                loginModal.style.display = 'none';
+            });
+
+            // Hide the toaster after a few seconds
+            setTimeout(function () {
+                toaster.style.display = 'none';
+            }, 3000);
         });
